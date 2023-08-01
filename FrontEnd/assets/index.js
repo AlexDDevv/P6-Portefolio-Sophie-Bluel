@@ -12,7 +12,7 @@ fetch("http://localhost:5678/api/works")
 
     for (i = 0; i < 11; i++) {
       const figure = document.createElement("figure");
-      figure.innerHTML = `<img src="${data[i].imageUrl}" alt="${data[i].title}">
+      figure.innerHTML = `<img src="${data[i].imageUrl}" alt="${data[i].title}" data-type="${data[i].category.name}">
         <figcaption>${data[i].title}</figcaption>`;
       gallery.appendChild(figure);
     }
@@ -28,7 +28,7 @@ fetch("http://localhost:5678/api/works")
     data.forEach((item) => {
       categories.add(item.category.name);
     });
-    console.log(categories);
+
     /* Création d'un objet set pour récupérer les filtres correspondant aux projets sans les doublons */
 
     // "Transformer" l'objet set en tableau afin d'exploiter ses données
@@ -43,9 +43,44 @@ fetch("http://localhost:5678/api/works")
       btnFiltre.textContent = cate;
       btnFiltre.classList.add("btn");
       filtres.appendChild(btnFiltre);
+
+      // btnFiltre.addEventListener("click", (e) => {
+      //   console.log(cate);
+      // });
     });
 
     portfolio.appendChild(filtres);
     portfolio.insertBefore(filtres, gallery);
     /* Ajout des boutons pour filtrer les projets dans la section portfolio */
+
+    /* Création de l'événement au clique sur les boutons filtres pour trier les images */
+    const figures = document.querySelectorAll(".gallery figure");
+    const btnsFiltres = document.querySelectorAll(".btn");
+
+    btnsFiltres.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const btnClicked = e.target;
+        const nameFilter = btnClicked.textContent;
+
+        btnsFiltres.forEach((btn) => {
+          if (btn === btnClicked) {
+            btn.classList.add("active-btn");
+          } else {
+            btn.classList.remove("active-btn");
+          }
+        });
+
+        figures.forEach((figure) => {
+          const image = figure.querySelector("img");
+          const imageType = image.dataset.type;
+
+          if (nameFilter === "Tous" || nameFilter === imageType) {
+            figure.style.display = "block";
+          } else {
+            figure.style.display = "none";
+          }
+        });
+      });
+    });
+    /* Création de l'événement au clique sur les boutons filtres pour trier les images */
   });

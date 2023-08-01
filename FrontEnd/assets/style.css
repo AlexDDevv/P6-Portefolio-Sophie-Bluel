@@ -49,7 +49,7 @@ table {
 /** end reset css**/
 body {
 	max-width: 1140px;
-	margin:auto;
+	margin: auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
@@ -65,6 +65,7 @@ section {
 h1{
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
@@ -75,7 +76,7 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
+	text-transform: uppercase;
 }
 
 h2{
@@ -88,19 +89,21 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
+	gap: 50px;
 }
 nav li {
-	padding: 0 10px;
 	font-size: 1.2em;
+	cursor: pointer;
 }
-
 li:hover {
 	color: #B1663C;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
+	max-width: 1050px;
+	margin: 120px auto;
 }
 #introduction figure {
 	flex: 1
@@ -110,36 +113,69 @@ li:hover {
 	margin: auto;
 	width: 80%;
 }
-
 #introduction article {
-	flex: 1
+	flex: 1;
+	padding-top: 10px;
 }
 #introduction h2 {
 	margin-bottom: 1em;
 }
-
 #introduction p {
-	margin-bottom: 0.5em;
+	margin-bottom: 1.2em;
+	line-height: 16px;
+	max-width: 420px;
 }
+
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-bottom: 1.5em;
 }
-.gallery {
+#portfolio .container-filtres {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 50px;
+}
+#portfolio .container-filtres .btn {
+	background: transparent;
+	border: 1px solid #1D6154;
+	border-radius: 20px;
+	color: #1D6154;
+	font-family: 'Syne';
+	font-size: 1rem;
+	font-weight: 700;
+	padding: 6px 15px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+#portfolio .container-filtres .btn:active {
+	transform: scale(0.9);
+}
+#portfolio .container-filtres .btn:first-child {
+	padding: 6px 25px;
+}
+#portfolio .container-filtres .btn:nth-child(2) {
+	padding: 6px 20px;
+}
+#portfolio .container-filtres .btn.active-btn {
+	background: #1D6154;
+	color: rgba(255, 255, 255, 0.9);
+}
+#portfolio .gallery {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
-
-.gallery img {
+#portfolio .gallery img {
 	width: 100%;
-
 }
+
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;

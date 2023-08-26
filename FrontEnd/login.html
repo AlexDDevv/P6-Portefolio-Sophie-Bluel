@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Sophie Bluel - Architecte d'intérieur</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+		rel="stylesheet">
+	<meta name="description" content="">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<link rel="stylesheet" href="./assets/style.css">
+</head>
+
+<body>
+	<header>
+		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+		<nav>
+			<ul>
+				<li>projets</li>
+				<li>contact</li>
+				<li id="loginLi" class="bolder">login</li>
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</ul>
+		</nav>
+	</header>
+
+	<!-- Création de la partie login -->
+	<section id="login">
+		<h2>Log In</h2>
+		<form action="#">
+			<div class="email-container">
+				<label for="emailInputLog">E-mail</label>
+				<input type="email" name="emailInputLog" id="emailInputLog">
+				<span id="errorEmail">Ne doit pas être vide.</span>
+			</div>
+			<div class="mdp-container">
+				<label for="mdpInputLog">Mot de passe</label>
+				<input type="password" name="mdpInputLog" id="mdpInputLog">
+				<span id="errorMdp">Ne doit pas être vide.</span>
+			</div>
+			<button type="submit" id="inputSubLog">Se connecter</button>
+		</form>
+		<a href="#" id="mdpOublie">Mot de passe oublié</a>
+	</section>
+
+	<footer>
+		<nav>
+			<ul>
+				<li>Mentions Légales</li>
+			</ul>
+		</nav>
+	</footer>
+	<script src="./assets/scripts/login.js"></script>
+</body>
+
+</html>

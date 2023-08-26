@@ -48,10 +48,12 @@ table {
 }
 /** end reset css**/
 body {
+	background: #FFFEF8;
 	max-width: 1140px;
 	margin: auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	position: relative;
 }
 header {
 	display: flex;
@@ -216,9 +218,306 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
+#login {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin: 150px 0 100px 0;
+}
+#login h2 {
+	margin-bottom: 30px;
+}
+#login form {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	min-width: 300px;
+}
+#login form div {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+#login form label {
+	font-size: 0.7rem;
+	font-weight: 500;
+	margin-bottom: 5px;
+}
+.error label {
+	color: red;
+}
+#login form input[type="email"], input[type="password"] {
+	border: none;
+	background: white;
+	height: 40px;
+	padding-left: 10px;
+	margin-bottom: 5px;
+	box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+}
+.error input {
+	color: red;
+	outline-color: red;
+}
+#login form span {
+	font-size: 0.6rem;
+	font-style: italic;
+	visibility: hidden;
+}
+#login form span.error {
+	color: red;
+	visibility: visible;
+}
+#login form #inputSubLog {
+	border: none;
+	width: 160px;
+	font-size: 0.8rem;
+	padding: 9px 0;
+	margin: 0 auto 25px auto;
+	cursor: pointer;
+}
+#login a {
+	color: black;
+	text-underline-offset: 1.5px;
+}
+
+.publish-changes {
+	width: 100%;
+	background: black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	margin-bottom: 20px;
+	padding: 10px 0;
+	position: fixed;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%);
+	z-index: 999;
+	display: none;
+}
+.publish-changes .p-edition {
+	color: white;
+}
+.publish-changes .btn-edition {
+	background: white;
+	border: none;
+	border-radius: 25px;
+	color: black;
+	font-family: 'Work Sans';
+	font-size: 0.8rem;
+	font-weight: 700;
+	padding: 9px 20px;
+	cursor: pointer;
+}
+.overlay {
+	position: fixed; 
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3); 
+	z-index: 998;
+	display: none;
+}
+.modal-container {
+	width: 630px;
+	background: white;
+	border-radius: 10px;
+	margin: 0 auto;
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 999;
+	display: none;
+}
+.modal-container .modal {
+	padding: 20px 30px 20px 30px;
+}
+.modal-container .modal .close-modal {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+.modal-container .modal .close-modal i {
+	cursor: pointer;
+}
+.modal-container .modal .close-modal i:first-child {
+	font-size: 1.4rem;
+}
+.modal-container .modal .close-modal i:last-child {
+	font-size: 1.2rem;
+}
+.modal-container .modal .modal-title {
+	text-align: center;
+	color: black;
+	font-family: 'Work Sans';
+	font-size: 30px;
+	font-weight: 400;
+	margin-bottom: 50px;
+}
+.modal-container .modal .gallery-part {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0 70px;
+	display: none;
+}
+.modal-container .modal .gallery-part .modal-gallery {
+	margin: 0 auto 40px auto;
+	display: flex;
+	flex-grow: 1;
+	flex-wrap: wrap;
+	gap: 12px 10px;
+	border-bottom: 1px solid #B3B3B3;
+	padding-bottom: 45px;
+}
+.modal-container .modal .gallery-part .modal-gallery figure {
+	width: 18%;
+	flex-grow: 1;
+	position: relative;
+}
+.modal-container .modal .gallery-part .modal-gallery figure:last-child {
+	flex-grow: 0;
+}
+.modal-container .modal .gallery-part .modal-gallery figure img {
+	width: 100%;
+}
+.modal-container .modal .gallery-part .modal-gallery figure .icon-figure {
+	position: absolute;
+	top: 5%;
+	right: 5%;
+	display: flex;
+	gap: 2px;
+}
+.modal-container .modal .gallery-part .modal-gallery figure i {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 15px;
+	height: 15px;
+	color: white;
+	background: black;
+	border-radius: 2px;
+	font-size: 0.6rem;
+	padding: 1px;
+	cursor: pointer;
+}
+.modal-container .modal .gallery-part .modal-gallery figure i:first-child {
+	display: none;
+}
+.modal-container .modal .gallery-part .modal-gallery figure:first-child i:first-child {
+	display: flex;
+}
+.modal-container .modal .gallery-part .addOrDelete {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 22px;
+	padding-bottom: 20px;
+	width: 100%;
+}
+.modal-container .modal .gallery-part .addOrDelete .add-picture {
+	background: #1D6154;
+	border: none;
+	border-radius: 25px;
+	color: white;
+	font-family: 'Syne';
+	font-size: 0.8rem;
+	font-weight: 700;
+	padding: 8px 0;
+	width: 55%;
+	cursor: pointer;
+}
+.modal-container .modal .gallery-part .addOrDelete .delete-gallery {
+	color: #D65353;
+	font-family: 'Syne';
+	font-size: 0.7rem;
+	cursor: pointer;
+}
+.modal-container .modal .add-picture-part {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 0 70px;
+}
+.modal-container .modal .add-picture-part .add-picture-area {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: #E8F1F6;
+	width: 100%;
+	border-radius: 3px;
+	padding: 25px 0 20px 0;
+	margin-bottom: 30px;
+}
+.modal-container .modal .add-picture-part .add-picture-area .add-picture-btn {
+	background: #CBD6DC;
+	border: none;
+	border-radius: 25px;
+	color: #306685;
+	font-family: 'Work Sans';
+	font-weight: 600;
+	padding: 10px 40px;
+	margin: 20px 0 10px 0;
+}
+.modal-container .modal .add-picture-part .add-picture-area .format-picture {
+	font-size: 0.6rem;
+}
+.modal-container .modal .add-picture-part .inputs-container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding-bottom: 40px;
+}
+.modal-container .modal .add-picture-part .inputs-container .input-title-container, .input-category-container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-bottom: 20px;
+}
+.modal-container .modal .add-picture-part .inputs-container .input-category-container  {
+	border-bottom: 1px solid #B3B3B3;
+	margin-bottom: 30px;
+	padding-bottom: 40px;
+}
+.modal-container .modal .add-picture-part .inputs-container label {
+	color: #3D3D3D;
+	font-weight: 500;
+}
+.modal-container .modal .add-picture-part .inputs-container input, select {
+	background: transparent;
+	border: none;
+	color: #444444;
+	font-family: 'Work Sans';
+	font-weight: 500;
+	box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+	padding: 15px;
+}
+.modal-container .modal .add-picture-part .inputs-container .validate-btn {
+	background: #A7A7A7;
+	border: none;
+	border-radius: 25px;
+	color: white;
+	font-family: 'Syne';
+	font-size: 0.8rem;
+	font-weight: 700;
+	padding: 8px 0;
+	width: 55%;
+	cursor: pointer;
+}
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em 0;
 }
 

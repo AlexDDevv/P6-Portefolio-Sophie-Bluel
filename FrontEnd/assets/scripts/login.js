@@ -1,44 +1,71 @@
 const loginLi = document.getElementById("loginLi");
 const loginForm = document.querySelector("#login form");
-const inputEmail = document.getElementById("emailInputLog");
-const inputMdp = document.getElementById("mdpInputLog");
-const loginSection = document.getElementById("login");
-const main = document.querySelector("main");
+const inputsForm = document.querySelectorAll("#login input");
 
 loginLi.addEventListener("click", () => {
-  const openLoginPage = () => {
-    if ((loginSection.style.display = "none")) {
-      loginLi.style.fontWeight = "bold";
-      main.style.display = "none";
-      loginSection.style.display = "flex";
-    }
-
-    if (loginLi.textContent === "logout") {
-      loginLi.textContent = "login";
-    }
-  };
-  openLoginPage();
+  window.location.href = "login.html";
 });
 
-const closeLoginPage = () => {
-  if ((loginSection.style.display = "flex")) {
-    loginLi.style.fontWeight = "normal";
-    main.style.display = "block";
-    loginSection.style.display = "none";
-  }
+// Fonction pour signaler une erreur
+const errorDisplay = (tag, valid) => {
+  const container = document.querySelector("." + tag + "-container");
+  const span = document.querySelector("." + tag + "-container > span");
 
-  if (loginLi.textContent === "login") {
-    loginLi.textContent = "logout";
+  if (!valid) {
+    container.classList.add("error");
+    span.classList.add("error");
+  } else {
+    container.classList.remove("error");
+    span.classList.remove("error");
   }
 };
-// Evènement submit quand on clique sur le bouton se connecter après avoir rempli le form
 
+// Fonction pour vérifier la validité de l'input email
+const emailChecker = (value) => {
+  if (value.length == 0) {
+    errorDisplay("email");
+    errorEmail.textContent = "Ne doit pas être vide.";
+  } else if (!value.match(/^\w+[\w.-]*@\w+(-\w+)*\.\w{2,4}$/)) {
+    errorDisplay("email");
+    errorEmail.textContent = "E-mail invalide.";
+  } else if (value === "sophie.bluel@test.tld") {
+    errorDisplay("email", true);
+  } else {
+    errorDisplay("email", true);
+  }
+};
+
+// Fonction pour vérifier la validité de l'input password
+const passwordChecker = (value) => {
+  if (value.length == 0) {
+    errorDisplay("mdp");
+  } else {
+    errorDisplay("mdp", true);
+  }
+};
+
+inputsForm.forEach((input) => {
+  input.addEventListener("input", (e) => {
+    switch (e.target.id) {
+      case "emailInputLog":
+        emailChecker(e.target.value);
+        break;
+      case "mdpInputLog":
+        passwordChecker(e.target.value);
+        break;
+      default:
+        nul;
+    }
+  });
+});
+
+// Evènement submit quand on clique sur le bouton se connecter après avoir rempli le form
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
   // On récupère les valeurs des inputs en objet
   const completedForm = {
-    email: inputEmail.value,
-    password: inputMdp.value,
+    email: emailInputLog.value,
+    password: mdpInputLog.value,
   };
 
   fetch("http://localhost:5678/api/users/login", {
@@ -50,21 +77,13 @@ loginForm.addEventListener("submit", (e) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("userId", data.userId);
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.userId);
+        window.location.href = "index.html";
+      } else {
+        errorDisplay("email");
+        errorDisplay("mdp");
+      }
     });
-
-  //   if (email && mdp) {
-  //     loginLi.style.fontWeight = "normal";
-  //     loginSection.style.display = "none";
-  //     main.style.display = "block";
-
-  //     if (loginLi.textContent === "login") {
-  //       loginLi.textContent = "logout";
-  //     }
-
-  //     inputs.forEach((input) => (input.value = ""));
-  //   } else {
-  //     alert("Veuillez remplir les champs correctement");
-  //   }
 });

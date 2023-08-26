@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
@@ -10,23 +9,24 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 		rel="stylesheet">
 	<meta name="description" content="">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 
 <body>
 	<header>
-		<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul>
 				<li>projets</li>
 				<li>contact</li>
-				<li>login</li>
+				<li id="loginLi">login</li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
 	</header>
 	<main>
-		<section id="introduction">
+		<section id="introduction" class="close">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
 			</figure>
@@ -35,17 +35,17 @@
 				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
 					finale du chantier.</p>
 				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
-					couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
+					couleurs dans le respect de l'esprit des lieux et le choix adapté des matériaux. Le suivi du
 					chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
 				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
 					décorateur(trice)</p>
 			</article>
 		</section>
-		<section id="portfolio">
+		<section id="portfolio" class="close">
 			<h2>Mes Projets</h2>
 			<div class="gallery"></div>
 		</section>
-		<section id="contact">
+		<section id="contact" class="close">
 			<h2>Contact</h2>
 			<p>Vous avez un projet ? Discutons-en !</p>
 			<form action="#" method="post">
@@ -59,6 +59,74 @@
 			</form>
 		</section>
 	</main>
+	
+	<!-- Création de la partie login -->
+	<section id="login">
+		<h2>Log In</h2>
+		<form action="#">
+			<div class="email-container">
+				<label for="emailInputLog">E-mail</label>
+				<input type="email" name="emailInputLog" id="emailInputLog">
+				<span class="error-mail">E-mail invalide</span>
+			</div>
+			<div class="mdp-container">
+				<label for="mdpInputLog">Mot de passe</label>
+				<input type="password" name="mdpInputLog" id="mdpInputLog">
+				<span class="error-mdp">Ne doit pas être vide</span>
+			</div>
+			<input type="submit" value="Se connecter" id="inputSubLog">
+		</form>
+		<a href="#" id="mdpOublie">Mot de passe oublié</a>
+	</section>
+	
+	<!-- Création de la modal -->
+	<div class="publish-changes">
+		<p class="p-edition">
+			<i class="fa-solid fa-pen-to-square"></i>
+			Mode édition
+		</p>
+		<button class="btn-edition">publier les changements</button>
+	</div>
+	<div class="overlay modal-trigger"></div>
+	<div class="modal-container">
+		<div class="modal">
+			<div class="close-modal">
+				<i class="fa-solid fa-arrow-left" id="goBackModal"></i>
+				<i class="fa-solid fa-xmark" id="closeModal"></i>
+			</div>
+			<h3 class="modal-title">Galerie photo</h3>
+			<div class="gallery-part">
+				<div class="modal-gallery"></div>
+				<div class="addOrDelete">
+					<button class="add-picture">Ajouter une photo</button>
+					<span class="delete-gallery">Supprimer la gallerie</span>
+				</div>
+			</div> 
+			<div class="add-picture-part">
+				<div class="add-picture-area">
+					<img src="./assets/images/ajoutPhoto.png" alt="image paysage classique pour ajouter une photo">
+					<button class="add-picture-btn">+ Ajouter photo</button>
+					<span class="format-picture">jpg, png : 4mo max</span>
+				</div>
+				<div class="inputs-container">
+					<div class="input-title-container">
+						<label for="inputTitlePicture">Titre</label>
+						<input type="text" name="inputTitlePicture" id="inputTitlePicture">
+					</div>
+					<div class="input-category-container">
+						<label for="inputCategoryPicture">Catégorie</label>
+						<select name="inputCategoryPicture" id="inputCategoryPicture">
+							<option value=""></option>
+							<option value="Appartements">Appartements</option>
+							<option value="Hotel&Restau">Hotels & restaurants</option>
+							<option value="Objets">Objets</option>
+						</select>
+					</div>
+					<button class="validate-btn">Valider</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<footer>
 		<nav>
@@ -67,7 +135,9 @@
 			</ul>
 		</nav>
 	</footer>
-	<script src="./assets/index.js"></script>
+	<script src="./assets/scripts/script.js"></script>
+	<script src="./assets/scripts/login.js"></script>
+	<script src="./assets/scripts/modal.js"></script>
 </body>
 
 </html>

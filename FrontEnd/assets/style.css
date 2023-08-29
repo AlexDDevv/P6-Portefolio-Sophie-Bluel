@@ -108,12 +108,21 @@ li:hover {
 	margin: 120px auto;
 }
 #introduction figure {
-	flex: 1
+	flex: 1;
 }
 #introduction img {
 	display: block;
-	margin: auto;
+	margin: 0 auto 12px auto;
 	width: 80%;
+}
+#introduction figure span {
+	padding-left: 52px;
+	opacity: 0;
+	visibility: hidden;
+}
+#introduction figure span.display-modif {
+	opacity: 1;
+	visibility: visible;
 }
 #introduction article {
 	flex: 1;
@@ -127,10 +136,26 @@ li:hover {
 	line-height: 16px;
 	max-width: 420px;
 }
-
-#portfolio h2 {
+#portfolio .title-and-span {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 35px;
+	margin-bottom: 45px;
+}
+#portfolio .title-and-span h2 {
 	text-align: center;
-	margin-bottom: 1.5em;
+}
+#portfolio .title-and-span span {
+	color: black;
+	font-family: 'Work Sans';
+	font-size: 0.9rem;
+	font-weight: 400;
+	cursor: pointer;
+	display: none;
+}
+#portfolio .title-and-span span.display-modif {
+	display: block;
 }
 #portfolio .container-filtres {
 	display: flex;
@@ -211,7 +236,7 @@ li:hover {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	margin: 150px 0 100px 0;
+	margin: 130px 0 90px 0;
 }
 #login h2 {
 	margin-bottom: 30px;
@@ -272,7 +297,16 @@ li:hover {
 }
 #login a {
 	color: black;
+	margin-bottom: 25px;
 	text-underline-offset: 1.5px;
+}
+#login .erreur-connexion {
+	font-size: 1rem;
+	visibility: hidden;
+}
+#login .erreur-connexion.error {
+	color: red;
+	visibility: visible;
 }
 .bolder {
 	font-weight: 700;
@@ -318,6 +352,9 @@ li:hover {
 	z-index: 998;
 	display: none;
 }
+.overlay.active-modal {
+	display: block;
+}
 .modal-container {
 	width: 630px;
 	background: white;
@@ -330,6 +367,9 @@ li:hover {
 	transform: translate(-50%, -50%);
 	z-index: 999;
 	display: none;
+}
+.modal-container.active-modal {
+	display: block;
 }
 .modal-container .modal {
 	padding: 20px 30px 20px 30px;
@@ -345,6 +385,7 @@ li:hover {
 }
 .modal-container .modal .close-modal i:first-child {
 	font-size: 1.4rem;
+	opacity: 0;
 }
 .modal-container .modal .close-modal i:last-child {
 	font-size: 1.2rem;
@@ -362,7 +403,6 @@ li:hover {
 	flex-direction: column;
 	align-items: center;
 	padding: 0 70px;
-	display: none;
 }
 .modal-container .modal .gallery-part .modal-gallery {
 	margin: 0 auto 40px auto;
@@ -442,6 +482,7 @@ li:hover {
 	align-items: center;
 	justify-content: center;
 	padding: 0 70px;
+	display: none;
 }
 .modal-container .modal .add-picture-part .add-picture-area {
 	display: flex;
@@ -515,6 +556,6 @@ li:hover {
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em 0;
+	margin: 1em 0;
 }
 

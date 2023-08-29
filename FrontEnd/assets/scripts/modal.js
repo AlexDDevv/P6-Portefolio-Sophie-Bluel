@@ -1,7 +1,7 @@
 fetch("http://localhost:5678/api/works")
   .then((res) => res.json())
   .then((modalData) => {
-    console.log(modalData);
+    // console.log(modalData);
     const modalGallery = document.querySelector(".modal-gallery");
 
     let i = 0;
@@ -17,3 +17,31 @@ fetch("http://localhost:5678/api/works")
       modalGallery.appendChild(modalFigures);
     }
   });
+
+const modalContainer = document.querySelector(".modal-container");
+const modalOverlay = document.querySelector(".overlay");
+const openModal = document.querySelectorAll(".modal-trigger");
+
+const toggleModal = () => {
+  modalContainer.classList.toggle("active-modal");
+  modalOverlay.classList.toggle("active-modal");
+};
+
+openModal.forEach((trigger) => trigger.addEventListener("click", toggleModal));
+
+const addPictureModal = () => {
+  const galleryPartModal = (document.querySelector(
+    ".gallery-part"
+  ).hidden = false);
+  const addPicturePartModal = (document.querySelector(
+    ".add-picture-part"
+  ).hidden = true);
+  const addPictureBtn = document.querySelector(".add-picture");
+
+  addPictureBtn.addEventListener("click", () => {
+    if ((galleryPartModal.hidden = false)) {
+      galleryPartModal.hidden = false;
+      addPicturePartModal.hidden = true;
+    }
+  });
+};

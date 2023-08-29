@@ -3,6 +3,12 @@ const loginForm = document.querySelector("#login form");
 const inputsForm = document.querySelectorAll("#login input");
 
 loginLi.addEventListener("click", () => {
+  if (localStorage.getItem("userId") && localStorage.getItem("token")) {
+    // Si l'utilisateur est connecté, effectuer la déconnexion
+    localStorage.clear();
+    // Une fois déconnecté, mettre à jour le texte du lien
+    loginLi.textContent = "login";
+  }
   window.location.href = "login.html";
 });
 
@@ -17,6 +23,17 @@ const errorDisplay = (tag, valid) => {
   } else {
     container.classList.remove("error");
     span.classList.remove("error");
+  }
+};
+
+// Fonction pour afficher un message d'erreur
+const errorConnection = (valid) => {
+  const pError = document.querySelector(".erreur-connexion");
+
+  if (!valid) {
+    pError.classList.add("error");
+  } else {
+    pError.classList.remove("error");
   }
 };
 
@@ -59,6 +76,23 @@ inputsForm.forEach((input) => {
   });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("userId") && localStorage.getItem("token")) {
+    loginLi.textContent = "logout";
+
+    const modifModeBar = document.querySelector(".publish-changes");
+    modifModeBar.style.display = "flex";
+
+    const header = document.querySelector("header");
+    header.style.paddingTop = "50px";
+
+    const modifSpans = document.querySelectorAll(".span-modif");
+    modifSpans.forEach((span) => {
+      span.classList.add("display-modif");
+    });
+  }
+});
+
 // Evènement submit quand on clique sur le bouton se connecter après avoir rempli le form
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -84,6 +118,7 @@ loginForm.addEventListener("submit", (e) => {
       } else {
         errorDisplay("email");
         errorDisplay("mdp");
+        errorConnection();
       }
     });
 });

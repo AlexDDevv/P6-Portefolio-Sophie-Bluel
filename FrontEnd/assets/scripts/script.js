@@ -44,10 +44,6 @@ fetch("http://localhost:5678/api/works")
       btnFiltre.textContent = cate;
       btnFiltre.classList.add("btn");
       filtres.appendChild(btnFiltre);
-
-      // btnFiltre.addEventListener("click", (e) => {
-      //   console.log(cate);
-      // });
     });
 
     portfolio.appendChild(filtres);
@@ -58,7 +54,7 @@ fetch("http://localhost:5678/api/works")
     const figures = document.querySelectorAll(".gallery figure");
     const btnsFiltres = document.querySelectorAll(".btn");
 
-    btnsFiltres.forEach((btn) => {
+    btnsFiltres.forEach((btn, index) => {
       btn.addEventListener("click", (e) => {
         const btnClicked = e.target;
         const nameFilter = btnClicked.textContent;
@@ -82,6 +78,10 @@ fetch("http://localhost:5678/api/works")
           }
         });
       });
+
+      if (index === 0) {
+        btn.classList.add("active-btn");
+      }
     });
     /* Création de l'événement au clique sur les boutons filtres pour trier les images */
   });

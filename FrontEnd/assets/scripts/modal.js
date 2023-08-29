@@ -29,19 +29,30 @@ const toggleModal = () => {
 
 openModal.forEach((trigger) => trigger.addEventListener("click", toggleModal));
 
-const addPictureModal = () => {
-  const galleryPartModal = (document.querySelector(
-    ".gallery-part"
-  ).hidden = false);
-  const addPicturePartModal = (document.querySelector(
-    ".add-picture-part"
-  ).hidden = true);
-  const addPictureBtn = document.querySelector(".add-picture");
+const galleryPartModal = document.querySelector(".gallery-part");
+const addPicturePartModal = document.querySelector(".add-picture-part");
+const titleChange = document.querySelector(".modal-title");
+const arrowBack = document.getElementById("goBackModal");
 
-  addPictureBtn.addEventListener("click", () => {
-    if ((galleryPartModal.hidden = false)) {
-      galleryPartModal.hidden = false;
-      addPicturePartModal.hidden = true;
-    }
-  });
+const openAddPicturePage = () => {
+  addPicturePartModal.style.display = "flex";
+  galleryPartModal.style.display = "none";
+  titleChange.textContent = "Ajout photo";
+  arrowBack.classList.add("visible-arrow");
 };
+
+const goBackToGallery = () => {
+  addPicturePartModal.style.display = "none";
+  galleryPartModal.style.display = "flex";
+  titleChange.textContent = "Galerie photo";
+  arrowBack.classList.remove("visible-arrow");
+};
+
+const addPictureBtn = document.querySelector(".add-picture");
+addPictureBtn.addEventListener("click", () => {
+  openAddPicturePage();
+});
+
+arrowBack.addEventListener("click", () => {
+  goBackToGallery();
+});

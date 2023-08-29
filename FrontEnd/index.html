@@ -29,6 +29,7 @@
 		<section id="introduction" class="close">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
+				<span class="span-modif"><i class="fa-regular fa-pen-to-square"></i> modifier</span>
 			</figure>
 			<article>
 				<h2>Designer d'espace</h2>
@@ -42,7 +43,10 @@
 			</article>
 		</section>
 		<section id="portfolio" class="close">
-			<h2>Mes Projets</h2>
+			<div class="title-and-span">
+				<h2>Mes Projets</h2>
+				<span class="span-modif modal-trigger"><i class="fa-regular fa-pen-to-square"></i> modifier</span>
+			</div>
 			<div class="gallery"></div>
 		</section>
 		<section id="contact" class="close">
@@ -63,7 +67,7 @@
 	<!-- Création de la modal -->
 	<div class="publish-changes">
 		<p class="p-edition">
-			<i class="fa-solid fa-pen-to-square"></i>
+			<i class="fa-regular fa-pen-to-square"></i>
 			Mode édition
 		</p>
 		<button class="btn-edition">publier les changements</button>
@@ -73,7 +77,7 @@
 		<div class="modal">
 			<div class="close-modal">
 				<i class="fa-solid fa-arrow-left" id="goBackModal"></i>
-				<i class="fa-solid fa-xmark" id="closeModal"></i>
+				<i class="fa-solid fa-xmark modal-trigger" id="closeModal"></i>
 			</div>
 			<h3 class="modal-title">Galerie photo</h3>
 			<div class="gallery-part">

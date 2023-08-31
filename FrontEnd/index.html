@@ -87,10 +87,14 @@
 					<span class="delete-gallery">Supprimer la gallerie</span>
 				</div>
 			</div> 
-			<div class="add-picture-part">
+			<form class="add-picture-part">
 				<div class="add-picture-area">
 					<img src="./assets/images/ajoutPhoto.png" alt="image paysage classique pour ajouter une photo">
-					<button class="add-picture-btn">+ Ajouter photo</button>
+					<img src="" alt="preview image" class="preview-img">
+					<div class="input-file-container">
+						<label for="addPictureBtn" class="add-picture-btn">+ Ajouter photo</label>
+						<input type="file" id="addPictureBtn" accept="image/*">
+					</div>
 					<span class="format-picture">jpg, png : 4mo max</span>
 				</div>
 				<div class="inputs-container">
@@ -109,7 +113,7 @@
 					</div>
 					<button class="validate-btn">Valider</button>
 				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 

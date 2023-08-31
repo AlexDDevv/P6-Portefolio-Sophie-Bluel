@@ -12,12 +12,13 @@ fetch("http://localhost:5678/api/works")
       <figcaption>éditer</figcaption>
       <div class= "icon-figure">
         <i class="fa-solid fa-arrows-up-down-left-right"></i>
-        <i class="fa-solid fa-trash-can"></i>
+        <i class="fa-solid fa-trash-can" data-project-id="${modalData[i].id}"></i>
       </div>`;
       modalGallery.appendChild(modalFigures);
     }
   });
 
+// Ouvrir et fermer la modal
 const modalContainer = document.querySelector(".modal-container");
 const modalOverlay = document.querySelector(".overlay");
 const openModal = document.querySelectorAll(".modal-trigger");
@@ -27,8 +28,15 @@ const toggleModal = () => {
   modalOverlay.classList.toggle("active-modal");
 };
 
-openModal.forEach((trigger) => trigger.addEventListener("click", toggleModal));
+openModal.forEach((trigger) =>
+  trigger.addEventListener("click", () => {
+    toggleModal();
+    clearImagePreview();
+    goBackToGallery();
+  })
+);
 
+// Changer de page dans la modal
 const galleryPartModal = document.querySelector(".gallery-part");
 const addPicturePartModal = document.querySelector(".add-picture-part");
 const titleChange = document.querySelector(".modal-title");
@@ -55,4 +63,26 @@ addPictureBtn.addEventListener("click", () => {
 
 arrowBack.addEventListener("click", () => {
   goBackToGallery();
+  clearImagePreview();
 });
+
+// Ajouter une nouvelle image
+const inputFile = document.getElementById("addPictureBtn");
+const imgPreview = document.querySelector(".preview-img");
+
+inputFile.addEventListener("change", () => {
+  file = inputFile.files[0];
+
+  const reader = new FileReader();
+  reader.onloadend = function () {
+    imgPreview.style.display = "block";
+    imgPreview.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+// Supprimer l'image choisie
+const clearImagePreview = () => {
+  imgPreview.style.display = "none";
+  imgPreview.src = "";
+};

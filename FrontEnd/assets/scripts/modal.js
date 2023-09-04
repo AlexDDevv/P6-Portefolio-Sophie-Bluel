@@ -12,10 +12,40 @@ fetch("http://localhost:5678/api/works")
       <figcaption>éditer</figcaption>
       <div class= "icon-figure">
         <i class="fa-solid fa-arrows-up-down-left-right"></i>
-        <i class="fa-solid fa-trash-can" data-project-id="${modalData[i].id}"></i>
+        <i class="fa-solid fa-trash-can" id="${modalData[i].id}"></i>
       </div>`;
       modalGallery.appendChild(modalFigures);
     }
+
+    // Supprimer un projet
+    const deleteProject = () => {
+      const iconsTrash = document.querySelectorAll(".fa-trash-can");
+      iconsTrash.forEach((icon) => {
+        icon.addEventListener("click", (e) => {
+          const projectId = e.currentTarget.id;
+          // console.log(projectId);
+          const userToken = localStorage.getItem("token");
+          // console.log(userToken);
+
+          fetch(`http://localhost:5678/api/works/${projectId}`, {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          })
+            .then((response) => response.json())
+            .then((dataRes) => {
+              // console.log(dataRes);
+              if (dataRes === 204) {
+                console.log(dataRes);
+              } else {
+                console.log("Une erreur est survenue.");
+              }
+            });
+        });
+      });
+    };
+    deleteProject();
   });
 
 // Ouvrir et fermer la modal

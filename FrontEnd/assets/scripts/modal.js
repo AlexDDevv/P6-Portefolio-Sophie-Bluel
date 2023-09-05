@@ -37,7 +37,7 @@ fetch("http://localhost:5678/api/works")
             .then((dataRes) => {
               // console.log(dataRes);
               if (dataRes === 204) {
-                console.log(dataRes);
+                console.log("Projet supprimé.");
               } else {
                 console.log("Une erreur est survenue.");
               }
@@ -116,3 +116,39 @@ const clearImagePreview = () => {
   imgPreview.style.display = "none";
   imgPreview.src = "";
 };
+
+// Permettre l'ajout d'un nouveau projet
+const modalInputFile = document.getElementById("addPictureBtn");
+const modalInputTitle = document.getElementById("inputTitlePicture");
+const modalInputCate = document.getElementById("inputCategoryPicture");
+
+const inputsModalChecker = () => {
+  if (
+    modalInputFile.value !== "" &&
+    modalInputTitle.value !== "" &&
+    modalInputCate.value !== ""
+  ) {
+    validateBtn.classList.add("valide");
+  } else {
+    validateBtn.classList.remove("valide");
+  }
+};
+
+modalInputFile.addEventListener("change", inputsModalChecker);
+modalInputTitle.addEventListener("change", inputsModalChecker);
+modalInputCate.addEventListener("change", inputsModalChecker);
+
+// Ajouter un nouveau projet
+const validateBtn = document.querySelector(".validate-btn");
+
+validateBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (validateBtn.classList.contains("valide")) {
+    validateBtn.style.background = "red";
+  } else {
+    validateBtn.classList.add("invalide");
+    setTimeout(() => {
+      validateBtn.classList.remove("invalide");
+    }, 820);
+  }
+});

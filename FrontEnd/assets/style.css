@@ -501,7 +501,7 @@ li:hover {
 }
 .modal-container .modal .add-picture-part .add-picture-area .preview-img {
 	height: 100%;
-	width: 43%;
+	width: 44%;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -572,7 +572,29 @@ li:hover {
 	padding: 8px 0;
 	width: 55%;
 	cursor: pointer;
+	transition: 0.3s;
 }
+.modal-container .modal .add-picture-part .inputs-container .validate-btn.valide {
+	background: #1D6154;
+}
+.modal-container .modal .add-picture-part .inputs-container .validate-btn.invalide {
+	animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  	transform: translate3d(0, 0, 0);
+}
+@keyframes shake {
+	10%, 90% {
+	  transform: translate3d(-1px, 0, 0);
+	}
+	20%, 80% {
+	  transform: translate3d(2px, 0, 0);
+	}
+	30%, 50%, 70% {
+	  transform: translate3d(-4px, 0, 0);
+	}
+	40%, 60% {
+	  transform: translate3d(4px, 0, 0);
+	}
+  }
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;

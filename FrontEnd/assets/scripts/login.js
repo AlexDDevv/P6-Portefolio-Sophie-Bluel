@@ -8,8 +8,10 @@ loginLi.addEventListener("click", () => {
     localStorage.clear();
     // Une fois déconnecté, mettre à jour le texte du lien
     loginLi.textContent = "login";
+    window.location.href = "index.html";
+  } else {
+    window.location.href = "login.html";
   }
-  window.location.href = "login.html";
 });
 
 // Fonction pour signaler une erreur
@@ -84,12 +86,10 @@ document.addEventListener("DOMContentLoaded", () => {
     modifModeBar.style.display = "flex";
 
     const header = document.querySelector("header");
-    header.style.paddingTop = "50px";
+    header.style.paddingTop = "40px";
 
-    const modifSpans = document.querySelectorAll(".span-modif");
-    modifSpans.forEach((span) => {
-      span.classList.add("display-modif");
-    });
+    const modifSpan = document.querySelector(".span-modif");
+    modifSpan.classList.add("display-modif");
   }
 });
 

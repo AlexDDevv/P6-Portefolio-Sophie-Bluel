@@ -12,7 +12,7 @@ fetch("http://localhost:5678/api/works")
 
     for (i = 0; i < data.length; i++) {
       const figure = document.createElement("figure");
-      figure.innerHTML = `<img src="${data[i].imageUrl}" alt="${data[i].title}" data-type="${data[i].category.name}">
+      figure.innerHTML = `<img src="${data[i].imageUrl}" alt="${data[i].title}" data-type="${data[i].category.name}" data-id="${data[i].id}">
         <figcaption>${data[i].title}</figcaption>`;
       gallery.appendChild(figure);
     }

@@ -22,6 +22,7 @@ fetch("http://localhost:5678/api/works")
       const iconsTrash = document.querySelectorAll(".fa-trash-can");
       iconsTrash.forEach((icon) => {
         icon.addEventListener("click", (e) => {
+          e.preventDefault();
           const projectId = e.currentTarget.id;
           // console.log(projectId);
           const userToken = localStorage.getItem("token");
@@ -37,7 +38,7 @@ fetch("http://localhost:5678/api/works")
             .then((dataRes) => {
               // console.log(dataRes);
               if (dataRes === 204) {
-                console.log("Projet supprimé.");
+                console.log(dataRes);
               } else {
                 console.log("Une erreur est survenue.");
               }
@@ -143,8 +144,9 @@ const validateBtn = document.querySelector(".validate-btn");
 
 validateBtn.addEventListener("click", (e) => {
   e.preventDefault();
+
   if (validateBtn.classList.contains("valide")) {
-    validateBtn.style.background = "red";
+    createNewWork();
   } else {
     validateBtn.classList.add("invalide");
     setTimeout(() => {
@@ -152,3 +154,30 @@ validateBtn.addEventListener("click", (e) => {
     }, 820);
   }
 });
+
+// Function pour créer un nouveau projet
+const createNewWork = () => {
+  const userToken = localStorage.getItem("token");
+  const formData = new FormData();
+
+  formData.append("title", modalInputTitle.value);
+  formData.append("category", modalInputCate.value);
+  formData.append("image", modalInputFile.files[0]);
+
+  fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+      Accept: "application/json",
+    },
+    body: formData,
+  })
+    .then((resForm) => resForm.json())
+    .then((resForm) => {
+      if (resForm.ok) {
+        console.log("Projet ajouté");
+      } else {
+        console.log("Une erreur est survenue.");
+      }
+    });
+};

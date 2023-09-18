@@ -84,4 +84,11 @@ fetch("http://localhost:5678/api/works")
       }
     });
     /* Création de l'événement au clique sur les boutons filtres pour trier les images */
+
+    const deleteFiltres = () => {
+      if (localStorage.getItem("userId") && localStorage.getItem("token")) {
+        filtres.style.display = "none";
+      }
+    };
+    deleteFiltres();
   });

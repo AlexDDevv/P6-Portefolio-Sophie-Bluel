@@ -8,10 +8,8 @@ fetch("http://localhost:5678/api/works")
 
     for (i = 0; i < modalData.length; i++) {
       const modalFigures = document.createElement("figure");
-      modalFigures.innerHTML = `<img src="${modalData[i].imageUrl}" alt="${modalData[i].title}" data-type="${modalData[i].category.name}"
-      <figcaption>éditer</figcaption>
+      modalFigures.innerHTML = `<img src="${modalData[i].imageUrl}" alt="${modalData[i].title}" data-type="${modalData[i].category.name}">
       <div class= "icon-figure">
-        <i class="fa-solid fa-arrows-up-down-left-right"></i>
         <i class="fa-solid fa-trash-can" id="${modalData[i].id}"></i>
       </div>`;
       modalGallery.appendChild(modalFigures);

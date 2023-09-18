@@ -60,7 +60,7 @@ const toggleModal = () => {
 openModal.forEach((trigger) =>
   trigger.addEventListener("click", () => {
     toggleModal();
-    clearImagePreview();
+    clearInputsModal();
     goBackToGallery();
   })
 );
@@ -92,7 +92,7 @@ addPictureBtn.addEventListener("click", () => {
 
 arrowBack.addEventListener("click", () => {
   goBackToGallery();
-  clearImagePreview();
+  clearInputsModal();
 });
 
 // Ajouter une nouvelle image
@@ -110,10 +110,12 @@ inputFile.addEventListener("change", () => {
   reader.readAsDataURL(file);
 });
 
-// Supprimer l'image choisie
-const clearImagePreview = () => {
+// Supprimer l'image choisie et vider les inputs
+const clearInputsModal = () => {
   imgPreview.style.display = "none";
   imgPreview.src = "";
+  modalInputTitle.value = "";
+  modalInputCate.value = "";
 };
 
 // Permettre l'ajout d'un nouveau projet

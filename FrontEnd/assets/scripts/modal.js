@@ -2,18 +2,22 @@ fetch("http://localhost:5678/api/works")
   .then((res) => res.json())
   .then((modalData) => {
     // console.log(modalData);
+
+    // Création de la galerie dans la modal
     const modalGallery = document.querySelector(".modal-gallery");
-
-    let i = 0;
-
-    for (i = 0; i < modalData.length; i++) {
-      const modalFigures = document.createElement("figure");
-      modalFigures.innerHTML = `<img src="${modalData[i].imageUrl}" alt="${modalData[i].title}" data-type="${modalData[i].category.name}">
-      <div class= "icon-figure">
-        <i class="fa-solid fa-trash-can" id="${modalData[i].id}"></i>
-      </div>`;
-      modalGallery.appendChild(modalFigures);
-    }
+    const createModalGallery = () => {
+      for (let i = 0; i < modalData.length; i++) {
+        const modalFigures = document.createElement("figure");
+        modalFigures.id = `modalFigure-${modalData[i].id}`;
+        // console.log(modalFigures.id);
+        modalFigures.innerHTML = `<img src="${modalData[i].imageUrl}" alt="${modalData[i].title}" data-type="${modalData[i].category.name}">
+        <div class= "icon-figure">
+          <i class="fa-solid fa-trash-can" data-id="${modalData[i].id}" id="trash-${modalData[i].id}"></i>
+        </div>`;
+        modalGallery.appendChild(modalFigures);
+      }
+    };
+    createModalGallery();
 
     // Supprimer un projet
     const deleteProject = () => {
@@ -21,7 +25,7 @@ fetch("http://localhost:5678/api/works")
       iconsTrash.forEach((icon) => {
         icon.addEventListener("click", (e) => {
           e.preventDefault();
-          const projectId = e.currentTarget.id;
+          const projectId = e.currentTarget.getAttribute("data-id");
           // console.log(projectId);
           const userToken = localStorage.getItem("token");
           // console.log(userToken);
@@ -32,13 +36,27 @@ fetch("http://localhost:5678/api/works")
               Authorization: `Bearer ${userToken}`,
             },
           })
-            .then((response) => response.json())
+            .then((response) => {
+              if (response.status === 204) {
+                return null;
+              }
+              return response.json();
+            })
             .then((dataRes) => {
-              // console.log(dataRes);
-              if (dataRes === 204) {
-                console.log(dataRes);
-              } else {
-                console.log("Une erreur est survenue.");
+              if (dataRes === null) {
+                console.log("Projet supprimé avec succès");
+
+                const modalProjectDelete = document.getElementById(
+                  `modalFigure-${projectId}`
+                );
+                console.log(modalProjectDelete);
+                modalProjectDelete.remove();
+
+                const mainProjectDelete = document.getElementById(
+                  `mainFigure-${projectId}`
+                );
+                console.log(mainProjectDelete);
+                mainProjectDelete.remove();
               }
             });
         });

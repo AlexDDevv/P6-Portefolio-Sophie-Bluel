@@ -49,13 +49,13 @@ fetch("http://localhost:5678/api/works")
                 const modalProjectDelete = document.getElementById(
                   `modalFigure-${projectId}`
                 );
-                console.log(modalProjectDelete);
+                // console.log(modalProjectDelete);
                 modalProjectDelete.remove();
 
                 const mainProjectDelete = document.getElementById(
                   `mainFigure-${projectId}`
                 );
-                console.log(mainProjectDelete);
+                // console.log(mainProjectDelete);
                 mainProjectDelete.remove();
               }
             });
@@ -160,11 +160,38 @@ modalInputCate.addEventListener("change", inputsModalChecker);
 // Ajouter un nouveau projet
 const validateBtn = document.querySelector(".validate-btn");
 
-validateBtn.addEventListener("click", (e) => {
+validateBtn.addEventListener("click", async (e) => {
   e.preventDefault();
+  const userToken = localStorage.getItem("token");
+  const formData = new FormData();
+
+  formData.append("title", modalInputTitle.value);
+  formData.append("category", modalInputCate.value);
+  formData.append("image", modalInputFile.files[0]);
+
+  console.log(modalInputTitle.value);
+  console.log(modalInputCate.value);
+  console.log(modalInputFile.files[0]);
 
   if (validateBtn.classList.contains("valide")) {
-    createNewWork();
+    // createNewWork();
+    const response = await fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+        Accept: "application/json",
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      console.log("Une erreur est survenue.");
+    } else {
+      console.log("Projet ajouté avec succès !");
+      const addedProject = await response.json();
+      createNewFigure(addedProject);
+      goBackToGallery();
+    }
   } else {
     validateBtn.classList.add("invalide");
     setTimeout(() => {
@@ -173,29 +200,60 @@ validateBtn.addEventListener("click", (e) => {
   }
 });
 
-// Function pour créer un nouveau projet
-const createNewWork = () => {
-  const userToken = localStorage.getItem("token");
-  const formData = new FormData();
+const createNewFigure = (projectData) => {
+  console.log(projectData);
 
-  formData.append("title", modalInputTitle.value);
-  formData.append("category", modalInputCate.value);
-  formData.append("image", modalInputFile.files[0]);
+  // Création de la nouvelle balise figure pour la modal
+  const galleryModal = document.querySelector(".modal-gallery");
+  const newModalFigure = document.createElement("figure");
 
-  fetch("http://localhost:5678/api/works", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${userToken}`,
-      Accept: "application/json",
-    },
-    body: formData,
-  })
-    .then((resForm) => resForm.json())
-    .then((resForm) => {
-      if (resForm.ok) {
-        console.log("Projet ajouté");
-      } else {
-        console.log("Une erreur est survenue.");
-      }
-    });
+  newModalFigure.id = `modalFigure-${projectData.id}`;
+  newModalFigure.innerHTML = `<img src="${projectData.imageUrl}" alt="${projectData.title}" data-type="${modalInputCate.value}">
+  <div class= "icon-figure">
+    <i class="fa-solid fa-trash-can" data-id="${projectData.id}" id="trash-${projectData.id}"></i>
+  </div>`;
+
+  galleryModal.appendChild(newModalFigure);
+
+  // // Création de la nouvelle balise figure pour la galerie principale
+  // const mainGallery = document.querySelector("gallery");
+  // const newMainFigure = document.createElement("figure");
+
+  // newMainFigure.id = `mainFigure-${projectData.id}`;
+  // newMainFigure.innerHTML = `<img src="${projectData.imageUrl}" alt="${projectData.title}" data-type="${modalInputCate.value}" data-id="${projectData.id}">
+  //   <figcaption>${projectData.title}</figcaption>`;
+
+  // mainGallery.appendChild(newMainFigure);
 };
+
+// Function pour créer un nouveau projet
+// const createNewWork = () => {
+//   const userToken = localStorage.getItem("token");
+//   const formData = new FormData();
+
+//   formData.append("title", modalInputTitle.value);
+//   formData.append("category", modalInputCate.value);
+//   formData.append("image", modalInputFile.files[0]);
+
+//   console.log(modalInputTitle.value);
+//   console.log(modalInputCate.value);
+//   console.log(modalInputFile.files[0]);
+
+//   fetch("http://localhost:5678/api/works", {
+//     method: "POST",
+//     headers: {
+//       Authorization: `Bearer ${userToken}`,
+//       Accept: "application/json",
+//     },
+//     body: formData,
+//   })
+//     .then((resForm) => resForm.json())
+//     .then((resForm) => {
+//       if (!resForm.ok) {
+//         console.log(resForm);
+//         console.log("Une erreur est survenue.");
+//       } else {
+//         console.log("Projet ajouté");
+//       }
+//     });
+// };

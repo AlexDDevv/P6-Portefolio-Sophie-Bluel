@@ -169,9 +169,9 @@ validateBtn.addEventListener("click", async (e) => {
   formData.append("category", modalInputCate.value);
   formData.append("image", modalInputFile.files[0]);
 
-  console.log(modalInputTitle.value);
-  console.log(modalInputCate.value);
-  console.log(modalInputFile.files[0]);
+  // console.log(modalInputTitle.value);
+  // console.log(modalInputCate.value);
+  // console.log(modalInputFile.files[0]);
 
   if (validateBtn.classList.contains("valide")) {
     // createNewWork();
@@ -201,7 +201,7 @@ validateBtn.addEventListener("click", async (e) => {
 });
 
 const createNewFigure = (projectData) => {
-  console.log(projectData);
+  // console.log(projectData);
 
   // Création de la nouvelle balise figure pour la modal
   const galleryModal = document.querySelector(".modal-gallery");
@@ -215,15 +215,15 @@ const createNewFigure = (projectData) => {
 
   galleryModal.appendChild(newModalFigure);
 
-  // // Création de la nouvelle balise figure pour la galerie principale
-  // const mainGallery = document.querySelector("gallery");
-  // const newMainFigure = document.createElement("figure");
+  // Création de la nouvelle balise figure pour la galerie principale
+  const mainGallery = document.querySelector(".gallery");
+  const newMainFigure = document.createElement("figure");
 
-  // newMainFigure.id = `mainFigure-${projectData.id}`;
-  // newMainFigure.innerHTML = `<img src="${projectData.imageUrl}" alt="${projectData.title}" data-type="${modalInputCate.value}" data-id="${projectData.id}">
-  //   <figcaption>${projectData.title}</figcaption>`;
+  newMainFigure.id = `mainFigure-${projectData.id}`;
+  newMainFigure.innerHTML = `<img src="${projectData.imageUrl}" alt="${projectData.title}" data-type="${modalInputCate.value}" data-id="${projectData.id}">
+    <figcaption>${projectData.title}</figcaption>`;
 
-  // mainGallery.appendChild(newMainFigure);
+  mainGallery.appendChild(newMainFigure);
 };
 
 // Function pour créer un nouveau projet

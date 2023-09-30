@@ -94,3 +94,32 @@ fetch("http://localhost:5678/api/works")
     };
     deleteFiltres();
   });
+
+const loginLi = document.getElementById("loginLi");
+
+loginLi.addEventListener("click", () => {
+  if (localStorage.getItem("userId") && localStorage.getItem("token")) {
+    // Si l'utilisateur est connecté, effectuer la déconnexion
+    localStorage.clear();
+    // Une fois déconnecté, mettre à jour le texte du lien
+    loginLi.textContent = "login";
+    window.location.href = "index.html";
+  } else {
+    window.location.href = "login.html";
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("userId") && localStorage.getItem("token")) {
+    loginLi.textContent = "logout";
+
+    const modifModeBar = document.querySelector(".publish-changes");
+    modifModeBar.style.display = "flex";
+
+    const header = document.querySelector("header");
+    header.style.paddingTop = "40px";
+
+    const modifSpan = document.querySelector(".span-modif");
+    modifSpan.classList.add("display-modif");
+  }
+});

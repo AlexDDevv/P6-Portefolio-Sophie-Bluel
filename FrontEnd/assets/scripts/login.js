@@ -1,34 +1,21 @@
-const loginLi = document.getElementById("loginLi");
 const loginForm = document.querySelector("#login form");
 const inputsForm = document.querySelectorAll("#login input");
-
-loginLi.addEventListener("click", () => {
-  if (localStorage.getItem("userId") && localStorage.getItem("token")) {
-    // Si l'utilisateur est connecté, effectuer la déconnexion
-    localStorage.clear();
-    // Une fois déconnecté, mettre à jour le texte du lien
-    loginLi.textContent = "login";
-    window.location.href = "index.html";
-  } else {
-    window.location.href = "login.html";
-  }
-});
 
 // Fonction pour signaler une erreur
 const errorDisplay = (tag, valid) => {
   const container = document.querySelector("." + tag + "-container");
-  const span = document.querySelector("." + tag + "-container > span");
+  const label = document.querySelector("." + tag + "-container > label");
 
   if (!valid) {
     container.classList.add("error");
-    span.classList.add("error");
+    label.classList.add("error");
   } else {
     container.classList.remove("error");
-    span.classList.remove("error");
+    label.classList.remove("error");
   }
 };
 
-// Fonction pour afficher un message d'erreur
+// Fonction pour afficher le message d'erreur
 const errorConnection = (valid) => {
   const pError = document.querySelector(".erreur-connexion");
 
@@ -43,12 +30,10 @@ const errorConnection = (valid) => {
 const emailChecker = (value) => {
   if (value.length == 0) {
     errorDisplay("email");
-    errorEmail.textContent = "Ne doit pas être vide.";
   } else if (!value.match(/^\w+[\w.-]*@\w+(-\w+)*\.\w{2,4}$/)) {
     errorDisplay("email");
-    errorEmail.textContent = "E-mail invalide.";
-  } else if (value === "sophie.bluel@test.tld") {
-    errorDisplay("email", true);
+  } else if (!value === "sophie.bluel@test.tld") {
+    errorDisplay("email");
   } else {
     errorDisplay("email", true);
   }
@@ -76,21 +61,6 @@ inputsForm.forEach((input) => {
         nul;
     }
   });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  if (localStorage.getItem("userId") && localStorage.getItem("token")) {
-    loginLi.textContent = "logout";
-
-    const modifModeBar = document.querySelector(".publish-changes");
-    modifModeBar.style.display = "flex";
-
-    const header = document.querySelector("header");
-    header.style.paddingTop = "40px";
-
-    const modifSpan = document.querySelector(".span-modif");
-    modifSpan.classList.add("display-modif");
-  }
 });
 
 // Evènement submit quand on clique sur le bouton se connecter après avoir rempli le form

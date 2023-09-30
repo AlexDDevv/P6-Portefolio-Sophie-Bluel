@@ -174,7 +174,6 @@ validateBtn.addEventListener("click", async (e) => {
   // console.log(modalInputFile.files[0]);
 
   if (validateBtn.classList.contains("valide")) {
-    // createNewWork();
     const response = await fetch("http://localhost:5678/api/works", {
       method: "POST",
       headers: {
@@ -225,35 +224,3 @@ const createNewFigure = (projectData) => {
 
   mainGallery.appendChild(newMainFigure);
 };
-
-// Function pour créer un nouveau projet
-// const createNewWork = () => {
-//   const userToken = localStorage.getItem("token");
-//   const formData = new FormData();
-
-//   formData.append("title", modalInputTitle.value);
-//   formData.append("category", modalInputCate.value);
-//   formData.append("image", modalInputFile.files[0]);
-
-//   console.log(modalInputTitle.value);
-//   console.log(modalInputCate.value);
-//   console.log(modalInputFile.files[0]);
-
-//   fetch("http://localhost:5678/api/works", {
-//     method: "POST",
-//     headers: {
-//       Authorization: `Bearer ${userToken}`,
-//       Accept: "application/json",
-//     },
-//     body: formData,
-//   })
-//     .then((resForm) => resForm.json())
-//     .then((resForm) => {
-//       if (!resForm.ok) {
-//         console.log(resForm);
-//         console.log("Une erreur est survenue.");
-//       } else {
-//         console.log("Projet ajouté");
-//       }
-//     });
-// };

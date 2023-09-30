@@ -267,7 +267,7 @@ li:hover {
 	font-weight: 500;
 	margin-bottom: 5px;
 }
-.error label {
+.error {
 	color: red;
 }
 #login form input[type="email"], input[type="password"] {
@@ -281,15 +281,6 @@ li:hover {
 .error input {
 	color: red;
 	outline-color: red;
-}
-#login form span {
-	font-size: 0.6rem;
-	font-style: italic;
-	visibility: hidden;
-}
-#login form span.error {
-	color: red;
-	visibility: visible;
 }
 #login form #inputSubLog {
 	width: 160px;

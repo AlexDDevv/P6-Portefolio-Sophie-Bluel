@@ -57,12 +57,27 @@ fetch("http://localhost:5678/api/works")
                 );
                 // console.log(mainProjectDelete);
                 mainProjectDelete.remove();
+                ifDeleteSpanAppear(true);
+              } else {
+                ifDeleteSpanAppear();
               }
             });
         });
       });
     };
     deleteProject();
+
+    const ifDeleteSpanAppear = (valid) => {
+      const spanProject = document.querySelector(".span-project");
+
+      if (valid) {
+        spanProject.textContent = "Projet supprimé avec succès !";
+        spanProject.style.color = "#4ade80";
+      } else {
+        spanProject.textContent = "Une erreur est survenue.";
+        spanProject.style.color = "#ef4444";
+      }
+    };
   });
 
 // Ouvrir et fermer la modal
@@ -187,6 +202,7 @@ validateBtn.addEventListener("click", async (e) => {
       console.log("Une erreur est survenue.");
     } else {
       console.log("Projet ajouté avec succès !");
+      ifAddSpanAppear(true);
       const addedProject = await response.json();
       createNewFigure(addedProject);
       goBackToGallery();
@@ -223,4 +239,13 @@ const createNewFigure = (projectData) => {
     <figcaption>${projectData.title}</figcaption>`;
 
   mainGallery.appendChild(newMainFigure);
+};
+
+const ifAddSpanAppear = (valid) => {
+  const spanProject = document.querySelector(".span-project");
+
+  if (valid) {
+    spanProject.textContent = "Projet ajouté avec succès !";
+    spanProject.style.color = "#4ade80";
+  }
 };

@@ -145,10 +145,9 @@ inputFile.addEventListener("change", () => {
 
 // Supprimer l'image choisie et vider les inputs
 const clearInputsModal = () => {
+  addPicturePartModal.reset();
   imgPreview.style.display = "none";
   imgPreview.src = "";
-  modalInputTitle.value = "";
-  modalInputCate.value = "";
 };
 
 // Permettre l'ajout d'un nouveau projet
@@ -206,6 +205,7 @@ validateBtn.addEventListener("click", async (e) => {
       const addedProject = await response.json();
       createNewFigure(addedProject);
       goBackToGallery();
+      clearInputsModal();
     }
   } else {
     validateBtn.classList.add("invalide");

@@ -1,3 +1,4 @@
+// Déclaration du form de connexion et ses inputs
 const loginForm = document.querySelector("#login form");
 const inputsForm = document.querySelectorAll("#login input");
 
@@ -63,9 +64,10 @@ inputsForm.forEach((input) => {
   });
 });
 
-// Evènement submit quand on clique sur le bouton se connecter après avoir rempli le form
+// eventListener submit quand on clique sur le bouton se connecter après avoir rempli le form
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
+
   // On récupère les valeurs des inputs en objet
   const completedForm = {
     email: emailInputLog.value,

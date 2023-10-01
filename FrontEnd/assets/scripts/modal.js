@@ -1,15 +1,12 @@
 fetch("http://localhost:5678/api/works")
   .then((res) => res.json())
   .then((modalData) => {
-    // console.log(modalData);
-
     // Création de la galerie dans la modal
     const modalGallery = document.querySelector(".modal-gallery");
     const createModalGallery = () => {
       for (let i = 0; i < modalData.length; i++) {
         const modalFigures = document.createElement("figure");
         modalFigures.id = `modalFigure-${modalData[i].id}`;
-        // console.log(modalFigures.id);
         modalFigures.innerHTML = `<img src="${modalData[i].imageUrl}" alt="${modalData[i].title}" data-type="${modalData[i].category.name}">
         <div class= "icon-figure">
           <i class="fa-solid fa-trash-can" data-id="${modalData[i].id}" id="trash-${modalData[i].id}"></i>
@@ -26,9 +23,7 @@ fetch("http://localhost:5678/api/works")
         icon.addEventListener("click", (e) => {
           e.preventDefault();
           const projectId = e.currentTarget.getAttribute("data-id");
-          // console.log(projectId);
           const userToken = localStorage.getItem("token");
-          // console.log(userToken);
 
           fetch(`http://localhost:5678/api/works/${projectId}`, {
             method: "DELETE",
@@ -44,18 +39,14 @@ fetch("http://localhost:5678/api/works")
             })
             .then((dataRes) => {
               if (dataRes === null) {
-                console.log("Projet supprimé avec succès");
-
                 const modalProjectDelete = document.getElementById(
                   `modalFigure-${projectId}`
                 );
-                // console.log(modalProjectDelete);
                 modalProjectDelete.remove();
 
                 const mainProjectDelete = document.getElementById(
                   `mainFigure-${projectId}`
                 );
-                // console.log(mainProjectDelete);
                 mainProjectDelete.remove();
                 ifDeleteSpanAppear(true);
               } else {
@@ -183,10 +174,6 @@ validateBtn.addEventListener("click", async (e) => {
   formData.append("category", modalInputCate.value);
   formData.append("image", modalInputFile.files[0]);
 
-  // console.log(modalInputTitle.value);
-  // console.log(modalInputCate.value);
-  // console.log(modalInputFile.files[0]);
-
   if (validateBtn.classList.contains("valide")) {
     const response = await fetch("http://localhost:5678/api/works", {
       method: "POST",
@@ -197,16 +184,11 @@ validateBtn.addEventListener("click", async (e) => {
       body: formData,
     });
 
-    if (!response.ok) {
-      console.log("Une erreur est survenue.");
-    } else {
-      console.log("Projet ajouté avec succès !");
-      ifAddSpanAppear(true);
-      const addedProject = await response.json();
-      createNewFigure(addedProject);
-      goBackToGallery();
-      clearInputsModal();
-    }
+    ifAddSpanAppear(true);
+    const addedProject = await response.json();
+    createNewFigure(addedProject);
+    goBackToGallery();
+    clearInputsModal();
   } else {
     validateBtn.classList.add("invalide");
     setTimeout(() => {
@@ -216,8 +198,6 @@ validateBtn.addEventListener("click", async (e) => {
 });
 
 const createNewFigure = (projectData) => {
-  // console.log(projectData);
-
   // Création de la nouvelle balise figure pour la modal
   const galleryModal = document.querySelector(".modal-gallery");
   const newModalFigure = document.createElement("figure");

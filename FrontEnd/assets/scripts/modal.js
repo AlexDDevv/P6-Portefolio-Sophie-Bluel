@@ -30,29 +30,22 @@ fetch("http://localhost:5678/api/works")
             headers: {
               Authorization: `Bearer ${userToken}`,
             },
-          })
-            .then((response) => {
-              if (response.status === 204) {
-                return null;
-              }
-              return response.json();
-            })
-            .then((dataRes) => {
-              if (dataRes === null) {
-                const modalProjectDelete = document.getElementById(
-                  `modalFigure-${projectId}`
-                );
-                modalProjectDelete.remove();
+          }).then((response) => {
+            if (response.status === 204) {
+              const modalProjectDelete = document.getElementById(
+                `modalFigure-${projectId}`
+              );
+              modalProjectDelete.remove();
 
-                const mainProjectDelete = document.getElementById(
-                  `mainFigure-${projectId}`
-                );
-                mainProjectDelete.remove();
-                ifDeleteSpanAppear(true);
-              } else {
-                ifDeleteSpanAppear();
-              }
-            });
+              const mainProjectDelete = document.getElementById(
+                `mainFigure-${projectId}`
+              );
+              mainProjectDelete.remove();
+              ifDeleteSpanAppear(true);
+            } else {
+              ifDeleteSpanAppear();
+            }
+          });
         });
       });
     };

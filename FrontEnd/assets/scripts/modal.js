@@ -194,9 +194,11 @@ const createNewFigure = (projectData) => {
   // Création de la nouvelle balise figure pour la modal
   const galleryModal = document.querySelector(".modal-gallery");
   const newModalFigure = document.createElement("figure");
+  const selectedOption =
+    modalInputCate.options[modalInputCate.selectedIndex].textContent;
 
   newModalFigure.id = `modalFigure-${projectData.id}`;
-  newModalFigure.innerHTML = `<img src="${projectData.imageUrl}" alt="${projectData.title}" data-type="${modalInputCate.value}">
+  newModalFigure.innerHTML = `<img src="${projectData.imageUrl}" alt="${projectData.title}" data-type="${selectedOption}">
   <div class= "icon-figure">
     <i class="fa-solid fa-trash-can" data-id="${projectData.id}" id="trash-${projectData.id}"></i>
   </div>`;
@@ -208,7 +210,7 @@ const createNewFigure = (projectData) => {
   const newMainFigure = document.createElement("figure");
 
   newMainFigure.id = `mainFigure-${projectData.id}`;
-  newMainFigure.innerHTML = `<img src="${projectData.imageUrl}" alt="${projectData.title}" data-type="${modalInputCate.value}" data-id="${projectData.id}">
+  newMainFigure.innerHTML = `<img src="${projectData.imageUrl}" alt="${projectData.title}" data-type="${selectedOption}" data-id="${projectData.id}">
     <figcaption>${projectData.title}</figcaption>`;
 
   mainGallery.appendChild(newMainFigure);

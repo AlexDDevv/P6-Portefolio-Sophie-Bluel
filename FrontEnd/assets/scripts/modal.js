@@ -50,19 +50,19 @@ fetch("http://localhost:5678/api/works")
       });
     };
     deleteProject();
-
-    const ifDeleteSpanAppear = (valid) => {
-      const spanProject = document.querySelector(".span-project");
-
-      if (valid) {
-        spanProject.textContent = "Projet supprimé avec succès !";
-        spanProject.style.color = "#4ade80";
-      } else {
-        spanProject.textContent = "Une erreur est survenue.";
-        spanProject.style.color = "#ef4444";
-      }
-    };
   });
+
+const ifDeleteSpanAppear = (valid) => {
+  const spanProject = document.querySelector(".span-project");
+
+  if (valid) {
+    spanProject.textContent = "Projet supprimé avec succès !";
+    spanProject.style.color = "#4ade80";
+  } else {
+    spanProject.textContent = "Une erreur est survenue.";
+    spanProject.style.color = "#ef4444";
+  }
+};
 
 // Ouvrir et fermer la modal
 const modalContainer = document.querySelector(".modal-container");
@@ -214,6 +214,39 @@ const createNewFigure = (projectData) => {
     <figcaption>${projectData.title}</figcaption>`;
 
   mainGallery.appendChild(newMainFigure);
+
+  deleteNewProject(projectData);
+};
+
+const deleteNewProject = (projectData) => {
+  const deleteNewFigure = document.getElementById(`trash-${projectData.id}`);
+
+  deleteNewFigure.addEventListener("click", (e) => {
+    const newProjectId = e.currentTarget.getAttribute("data-id");
+    const tokenUser = localStorage.getItem("token");
+
+    fetch(`http://localhost:5678/api/works/${newProjectId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${tokenUser}`,
+      },
+    }).then((response) => {
+      if (response.status === 204) {
+        const modalProjectDelete = document.getElementById(
+          `modalFigure-${newProjectId}`
+        );
+        modalProjectDelete.remove();
+
+        const mainProjectDelete = document.getElementById(
+          `mainFigure-${newProjectId}`
+        );
+        mainProjectDelete.remove();
+        ifDeleteSpanAppear(true);
+      } else {
+        ifDeleteSpanAppear();
+      }
+    });
+  });
 };
 
 const ifAddSpanAppear = (valid) => {
